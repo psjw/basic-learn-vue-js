@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- .. -->
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //객체를 변수에 정의하고 Vue에 담는다.
+        /*
+        var options = {
+            el: '#app',
+            data: {
+                message: 'hi'
+            },
+            methods: {
+                
+            }
+        }
+        
+        var vm = new Vue(options);
+        */
+       
+        //가독성 상승 -> 객체 리터럴(통채로 객체를 넣어줌)
+        var vm = new Vue({
+          el: '#app',
+          data: {
+              message: 'hi'
+          },
+          methods: {
+              
+          },
+          created: function() {
+              
+          }
+        });
+    </script>
+</body>
+</html>
