@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ num }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10
+            },
+            // Watch보단 computed를 추천
+            // 단순 값에 대한 계산 및 Validation
+            // Vue내부연산 , 기준이 되는값이 data :{num} ->빠르게 계산        
+            computed: {
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            },
+            // 실제 무거운 로직( 매번 실행되는 것이 부담스러움 )
+            watch: {
+                //newValue : 신규 값, oldValue : 이전 값 -> 두개모두 받을수 있ㅇ므
+                num: function(newValue, oldValue) {
+                    console.log(oldValue);
+                    this.fetchUserByNumber(newValue);
+                }
+            },
+            methods: {
+                fetchUserByNumber: function(num){
+                    console.log(num);
+                    //axios.get(num);
+                }
+            }
+        })        
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 
+            링크제공 
+            router-link*2 2개 생성
+            router-link 최종적으로 anchor tag로 변환되서 나타남 <a href="">Login</a>
+            to="/login" 이동 url
+        -->
+        <div>
+            <router-link to="/login">Login</router-link>
+            <router-link to="/main">Main</router-link>
+        </div>
+        <!--router-view 제공하는 태그 view인스턴스에 router인스턴스를 연결해야 사용가능 -->
+        <router-view></router-view>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        //https://joshua1988.github.io/web-development/vuejs/vue-router-navigation-guards/
+        
+        //로그인
+        //http://127.0.0.1:5500/playground/14.router.html#/login
+        //접속시 로그인 컴포넌트 내용이 들어감
+        var loginComponent = {
+            template: '<div>login</div>'
+        }
+        //메인
+        //http://127.0.0.1:5500/playground/14.router.html#/main
+        var mainComponent = {
+            template: '<div>main</div>'
+        }
+
+        var router = new VueRouter({ 
+            mode: 'history',//#을 가지고 브라우저의 history api 활용하는 것을 제거
+            // 페이지의 라우팅 정보 -> 배열로 담김 -> 페이지의 갯수만큼 객체가 필요
+            routes: [{
+                    //페이지의 url 이름
+                    path: '/login',
+                    //name: 'login', 
+                    //해당 url에서 표시될 컴포넌트
+                    component: loginComponent //페이지마다 뿌려질 컴포넌트는 하나
+                },
+                {
+                    //url은 main 컴포넌트 이름은 mainComponent
+                    path: '/main',
+                    component: mainComponent
+                }
+            ]
+        });
+
+        new Vue({
+            el: '#app',
+            router: router, //router 연결 -> 없으면 라우터인식이 안됨 에러발생 Error in render: "TypeError: Cannot read properties of undefined (reading 'matched')"            
+            components: {
+                
+            }
+        });
+    </script>
+</body>
+
+</html>

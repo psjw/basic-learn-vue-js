@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ num }}</p>
+        <!-- 
+            <app-header v-on:하위 컴포넌트에서 발생한 이벤트이름 ="상위컴포넌트의 메서드이름"></app-header>    
+            appHeader 에서 'pass'라는 이벤트를 발생한 것을 상위컴포넌트 메서드로 전달
+        -->
+        <app-header v-on:pass="logText"></app-header>
+        <app-content v-on:increase="increaseNumber"></app-content>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //하위컴포넌트에서 상위컴포넌트랑 대화 emit
+
+        //event emit 구현 passEvent-> 메서드
+        var appHeader = {
+            template: '<button v-on:click="passEvent">click me</button>',
+            //이벤트 발생
+            methods: {
+                passEvent: function () {
+                    this.$emit('pass');
+                }
+            }
+        }
+
+        var appContent = {
+            template: '<button v-on:click="addNumber">add</button>',
+            methods: {
+                addNumber: function () {
+                    this.$emit('increase');
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            methods: {
+                logText: function () {
+                    console.log('hi');
+                },
+                //...num의 값을 하나 증가 
+                increaseNumber: function () {
+                    //this로 data의 num 접근가능                        
+                    this.num++;
+                }
+            },
+            data: {
+                num: 10
+            }
+        });
+
+        var obj = {
+            num: 10,
+            getNubmer: function () {
+                console.log(this.num);
+            }
+        }
+        
+        obj.getNubmer();
+        var Vue={
+            el: '',
+            data:{
+                num:10,
+            },
+            methods:{
+                getNubmer: function(){
+                    this.num; //method 속성 함수 안에서 this는 해당 num의 데이터를 바라봄
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
